@@ -24,6 +24,8 @@ public class GestorMunicipios
         public string sigla { get; set; }
 
         public override string ToString() => nome;
+
+        public IEnumerable<Municipio> Municipios { get; set; }
     }
 
     const string baseUrl = "https://servicodados.ibge.gov.br";
@@ -49,7 +51,7 @@ public class GestorMunicipios
 
     public async Task<IEnumerable<Municipio>> ObterMunicipios(UF uf)
     {
-        if (uf == null) 
+        if (uf == null)
             throw new ArgumentNullException(nameof(uf));
 
         using HttpClient client = new HttpClient();
