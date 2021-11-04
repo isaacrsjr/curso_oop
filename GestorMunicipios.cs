@@ -49,6 +49,9 @@ public class GestorMunicipios
 
     public async Task<IEnumerable<Municipio>> ObterMunicipios(UF uf)
     {
+        if (uf == null) 
+            throw new ArgumentNullException(nameof(uf));
+
         using HttpClient client = new HttpClient();
         client.BaseAddress = new Uri(baseUrl);
         client.DefaultRequestHeaders.Accept.Clear();
@@ -63,6 +66,4 @@ public class GestorMunicipios
         }
         return municipios;
     }
-
-
 }
