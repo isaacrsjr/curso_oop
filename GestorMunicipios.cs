@@ -47,4 +47,22 @@ public class GestorMunicipios
         return ufs;
     }
 
+    public async Task<IEnumerable<Municipio>> ObterMunicipios(UF uf)
+    {
+        using HttpClient client = new HttpClient();
+        client.BaseAddress = new Uri(baseUrl);
+        client.DefaultRequestHeaders.Accept.Clear();
+        client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+        IEnumerable<Municipio> ufs = null;
+        HttpResponseMessage response = await client.GetAsync(pathMunicipios.Replace("{UF}", uf.id.ToString()));
+        if (response.IsSuccessStatusCode)
+        {
+            ufs = await response.Content.ReadAsAsync<Municipio[]>();
+        }
+        return ufs;
+    }
+
+
 }
