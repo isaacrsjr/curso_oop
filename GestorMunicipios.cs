@@ -55,13 +55,13 @@ public class GestorMunicipios
         client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-        IEnumerable<Municipio> ufs = null;
+        IEnumerable<Municipio> municipios = null;
         HttpResponseMessage response = await client.GetAsync(pathMunicipios.Replace("{UF}", uf.id.ToString()));
         if (response.IsSuccessStatusCode)
         {
-            ufs = await response.Content.ReadAsAsync<Municipio[]>();
+            municipios = await response.Content.ReadAsAsync<Municipio[]>();
         }
-        return ufs;
+        return municipios;
     }
 
 
