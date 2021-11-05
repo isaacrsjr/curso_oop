@@ -4,8 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-
-// API do site: https://servicodados.ibge.gov.br/api/docs/localidades#api-Municipios-estadosUFMunicipiosGet
+using Newtonsoft.Json;
 
 public class GestorMunicipios
 {
@@ -44,7 +43,8 @@ public class GestorMunicipios
         HttpResponseMessage response = await client.GetAsync(pathUFs);
         if (response.IsSuccessStatusCode)
         {
-            ufs = await response.Content.ReadAsAsync<UF[]>();
+            string jsonUFs = await response.Content.ReadAsStringAsync();
+            ufs = JsonConvert.DeserializeObject<UF[]>(jsonUFs);
         }
         return ufs;
     }
@@ -64,7 +64,8 @@ public class GestorMunicipios
         HttpResponseMessage response = await client.GetAsync(pathMunicipios.Replace("{UF}", uf.id.ToString()));
         if (response.IsSuccessStatusCode)
         {
-            municipios = await response.Content.ReadAsAsync<Municipio[]>();
+            var jsonMunicipios = await response.Content.ReadAsStringAsync();
+            municipios = JsonConvert.DeserializeObject<Municipio[]>(jsonMunicipios);
         }
         return municipios;
     }
