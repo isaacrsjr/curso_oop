@@ -26,3 +26,4 @@ obj/Debug/net5.0/curso.GeneratedMSBuildEditorConfig.editorconfig
 obj/Debug/net5.0/curso.genruntimeconfig.cache
 obj/Debug/net5.0/curso.pdb
 obj/Debug/net5.0/ref/curso.dll
+bin/Debug/net5.0/System.Reactive.dll
